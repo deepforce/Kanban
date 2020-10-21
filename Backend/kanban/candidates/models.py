@@ -10,8 +10,8 @@ def upload_path(instance, filename):
 class Candidate(models.Model):
     STATUS = [
         ("Applied","Applied"),
-        ("Phone_Screen","Phone Screen"), 
-        ("On_site", "On site"),
+        ("Phone Screen","Phone Screen"), 
+        ("On site", "On site"),
         ("Offered", "Offered"),
         ("Accepted", "Accepted"),
         ("Rejected", "Rejected"),

@@ -33,6 +33,17 @@ const onDragEnd = (result, columns, setColumns) => {
         items: destItems,
       },
     });
+
+    // Update status
+    const destStatus = destColumn.name;
+    const removedId = removed.id;
+    const statusUpdateData = new FormData();
+    statusUpdateData.append('status', destStatus);
+    const url = "http://127.0.0.1:8000/candidates/" + removedId + "/";
+    fetch(url, {
+      method: 'PATCH',
+      body: statusUpdateData
+    })
   } else {
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];
@@ -85,7 +96,6 @@ function App() {
   
   function updateColumnByStatus(res) {
     const updateId = getKeyByValue(columns, res.status)
-    
     const column = columns[updateId];
     column['items'].push(res);
     setColumns({
