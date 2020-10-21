@@ -95,7 +95,6 @@ function App() {
         items: column['items'],
       }
     });
-    console.log(columns);
   }
 
   useEffect(() => {
@@ -161,6 +160,13 @@ function App() {
                               index={index}
                             >
                               {(provided, snapshot) => {
+                                let resume;
+                                if (item.resume === null) {
+                                  resume = <FileUpload itemId={item.id}/>
+                                } else {
+                                  resume = <a href={item.resume}>Resume</a>
+                                }
+
                                 return (
                                   <div
                                     ref={provided.innerRef}
@@ -181,7 +187,7 @@ function App() {
                                     <p>Name: {item.name}</p>
                                     <p>Education: {item.education}</p>
                                     <p>Contact: {item.contact}</p>
-                                    <FileUpload />
+                                    {resume}
                                   </div>
                                 );
                               }}

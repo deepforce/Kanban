@@ -8,11 +8,3 @@ from .serializers import CandidateSerializer
 class CandidatesViewSet(viewsets.ModelViewSet):
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
-
-    def post(self, request, *args, **kwargs):
-        name = request.data['name']
-        education = request.data['education']
-        contact = request.data['contact']
-        resume = request.data['file']
-        Candidate.objects.create(name=name, education=education, contact=contact, resume=resume)
-        return HttpResponse({'message': 'Candidate created'}, status=200)

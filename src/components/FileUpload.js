@@ -1,11 +1,10 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
 
-const FileUpload = () => {
+const FileUpload = (item) => {
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("Choose File");
   const [uploadedFile, setUploadedFile] = useState({});
-
   const onChange = (e) => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
@@ -14,11 +13,10 @@ const FileUpload = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append()
-    formData.append("file", file);
-
+    formData.append("resume", file);
+    const url = "http://127.0.0.1:8000/candidates/" + item.itemId + "/";
     try {
-      const res = await axios.post("http://127.0.0.1:8000/candidates/", formData, {
+      const res = await axios.patch(url, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
